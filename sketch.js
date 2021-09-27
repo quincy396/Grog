@@ -22,7 +22,7 @@ function preload(){
 }
 
 function setup(){
-    pixelDensity(100)
+
     noSmooth()
     createCanvas(1000, 600)
     //background(95, 138, 245)
