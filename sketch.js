@@ -17,26 +17,45 @@ const Grog = {
     }
 }
 let gameState = 0
+var count = 0
+var d = 200
+var offset = 200
 
 function preload(){
-    grogImg = loadImage('assets/grog.png')
-    VMImg = loadImage('assets/VM.png')
+    grogImg = loadImage('assets/GrogB.png')
+    EnemyImgs =[]
+    for (let i = 1; i<=6; i++){
+        EnemyImgs [i-1] = loadImage(`assets/Enemy${i}.png`)
+    }
+    //VMImg = loadImage('assets/VM.png')
 }
 
 function setup(){
-
-    noSmooth()
     createCanvas(1200, 600)
     //background(95, 138, 245)
-    //frameRate(15)
+    frameRate(10)
 
 }
 
+
 function draw(){
     background(150)
-    image(VMImg, 0,0,840, 600)
-    //fill(110, 59, 21)
-    //rect(0, 400, 1000, 200)
+    //rect(100, 100, 152,160)
+    
+    image(grogImg, 100,100)
+    //image(EnemyImgs[0], offset+d, 44)
+    if (d>0) {
+        image(EnemyImgs[0], offset+d, 44)
+        d -= 20
+    } else if (count>5){
+        d = 200
+        count = 0
+    } else {
+        image(EnemyImgs[count], offset+d, 44)
+        count +=1
+    }
+
+    
 }
 
 
