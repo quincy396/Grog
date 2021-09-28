@@ -16,15 +16,17 @@ const Grog = {
         }
     }
 }
+let gameState = 0
 
 function preload(){
     grogImg = loadImage('assets/grog.png')
+    VMImg = loadImage('assets/VM.png')
 }
 
 function setup(){
 
     noSmooth()
-    createCanvas(1000, 600)
+    createCanvas(1200, 600)
     //background(95, 138, 245)
     //frameRate(15)
 
@@ -32,7 +34,7 @@ function setup(){
 
 function draw(){
     background(150)
-    image(grogImg, 200,200,400,400)
+    image(VMImg, 0,0,840, 600)
     //fill(110, 59, 21)
     //rect(0, 400, 1000, 200)
 }
