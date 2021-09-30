@@ -1,2 +1,2 @@
-## just my grog sketch in p5.js
+## the start of my game
 https://quincy396.github.io/Grog/
