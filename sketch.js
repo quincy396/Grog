@@ -17,9 +17,9 @@ const Grog = {
     }
 }
 let gameState = 0
-var count = 0
-var d = 200
-var offset = 200
+let count = 0
+let d = 200
+let offset = 200
 
 function preload(){
     grogImg = loadImage('assets/GrogB.png')
@@ -34,6 +34,10 @@ function setup(){
     createCanvas(1200, 600)
     //background(95, 138, 245)
     frameRate(10)
+    let square = Array(9).fill(Array(9).fill(0))
+    console.log(square.length)
+    //square[0][0] = 0
+    console.log(square[0][0])
 
 }
 
