@@ -1,4 +1,4 @@
-let tileSize = 20
+let tileSize
 const drawTiles = (matrix) => {
 
     noStroke()
@@ -12,12 +12,13 @@ const drawTiles = (matrix) => {
 
 }
 
-const emptyMatrix = (x,y) => {
+const emptyMatrix = (x,y,tileS, color) => {
+    tileSize = tileS
     let a =[]
     for (let i = 0; i< x/tileSize; i++){
         let b=[]
         for (let j = 0; j< y/tileSize; j++){
-            b[j]=0
+            b[j]=color
         }
         a[i]=b
     }
