@@ -66,6 +66,11 @@ class World{
             object.y = object.y+y
             return true
         }
+        if (this.matrix[object.x+x][object.y+y] == "yellow" && object == g){
+            console.log("almost")
+            nextStage()
+        }
+        
         return false
     }
 
