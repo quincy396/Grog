@@ -18,14 +18,22 @@ class World{
     }
     fillColor(x,y,color){
         this.matrix[x][y] = color
-    }
+    }d
     fillRand(color){
         let x = round(random(this.sX))
         let y = round(random(this.sY))
         if (!(x==this.eX || y==this.eY)){
-            this.fillColor(x, y, color)
+            if (this.tileIsEmpty(x,y)){
+                this.fillColor(x, y, color)
+            }
         }
         
+    }
+    tileIsEmpty(x,y){
+        console.log(1)
+        console.log(g.x)
+        return true
+
     }
     fillBoardRand(num, color){
         for (let i = 0; i<num; i++){
@@ -37,7 +45,7 @@ class World{
         this.eY = round(random(this.sY))
         this.fillColor(this.eX,this.eY,'yellow')
     }
-    pixelIsEmpty(x,y){
+    pixelIsFloor(x,y){
 
         return ((this.matrix[Math.floor(x/this.tS)][Math.floor(y/this.tS)] == this.fC) 
         && (this.matrix[Math.floor((x+this.tS-1)/this.tS)][Math.floor((y+this.tS-1)/this.tS)] == this.fC)

@@ -12,7 +12,7 @@ class Grog {
     }
     moveX(value){
         if (this.x + value>=0 && this.x + value<=CanvasX){
-            if (w.pixelIsEmpty(this.x + value, this.y)){
+            if (w.pixelIsFloor(this.x + value, this.y)){
                 this.x = this.x + value
             }
         }
@@ -20,7 +20,7 @@ class Grog {
     }
     moveY(value){
         if (this.y + value>=0 && this.y + value<=CanvasY){
-            if (w.pixelIsEmpty(this.x, this.y + value)){
+            if (w.pixelIsFloor(this.x, this.y + value)){
                 this.y = this.y + value
             }
         }
