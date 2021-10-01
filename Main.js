@@ -5,6 +5,8 @@ let tileS = 32
 let gameState = 0
 let w
 let g
+let count = 10
+let cur = count
 
 function preload(){
     grogImg = loadImage('assets/grog.png')
@@ -18,20 +20,26 @@ function preload(){
 
 function setup(){
     createCanvas(CanvasX, CanvasY)
-    g = new Grog(grogImg, 0,0,0)
-    w = new World(CanvasX, CanvasY, tileS, 0)
+    background(0)
+    g = new Grog(grogImg, 1,1,0)
+    w = new World(CanvasX, CanvasY, tileS, 0, 100)
     w.placeExit()
-    w.fillBoardRand(200,100)
+    w.placeEntity(g)
+    w.fillBoardRand(200)
 }
 
 function draw(){
-    w.fillRand(100)
-    w.fillRand(0)
-    w.drawWorld()
-
     g.update()
 
-    g.drawImg()
+    if (cur<0){
+        w.fillRandWall()
+        w.fillRandFloor()
+        cur = count
+    }
+    cur--
+    
+    
+    w.drawWorld()
 }
 
 

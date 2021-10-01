@@ -1,12 +1,15 @@
 let tileSize
 const drawTiles = (matrix) => {
-
     noStroke()
     for (let i = 0; i< matrix.length; i++){
         for (let j = 0; j< matrix[0].length; j++){
-            fill(matrix[i][j])
-            //console.log(matrix[i][j])
-            rect(i*tileSize, j*tileSize,tileSize,tileSize)
+            if(typeof (matrix[i][j]) == 'object' ) {
+                matrix[i][j].drawImg()
+            } else{
+                fill(matrix[i][j])
+                rect(i*tileSize, j*tileSize,tileSize,tileSize)
+            }
+            
         }
     }
 

@@ -1,13 +1,14 @@
 class World{
-    constructor(CanvasX, CanvasY ,tileSize, fc){
+    constructor(CanvasX, CanvasY ,tileSize, fc, wc){
         this.pixelsX = CanvasX
         this.pixelsY = CanvasY
         this.tS = tileSize
         this.sX = (this.pixelsX-this.tS)/this.tS
         this.sY = (this.pixelsY-this.tS)/this.tS
         this.fC = fc
+        this.wC = wc
 
-        this.matrix = emptyMatrix(this.pixelsX, this.pixelsY, this.tS, this.fC)
+        this.resetWorld()
         
     }
     resetWorld(){
@@ -18,26 +19,31 @@ class World{
     }
     fillColor(x,y,color){
         this.matrix[x][y] = color
-    }d
+    }
+    fillRandWall(){
+        let x = round(random(this.sX))
+        let y = round(random(this.sY))
+        if (this.matrix[x][y] == this.fC){
+            this.fillColor(x, y, this.wC)
+        }   
+    }
+    fillRandFloor(){
+        let x = round(random(this.sX))
+        let y = round(random(this.sY))
+        if (this.matrix[x][y] == this.wC){
+            this.fillColor(x, y, this.fC)
+        }   
+    }
     fillRand(color){
         let x = round(random(this.sX))
         let y = round(random(this.sY))
-        if (!(x==this.eX || y==this.eY)){
-            if (this.tileIsEmpty(x,y)){
-                this.fillColor(x, y, color)
-            }
-        }
-        
+        if (this.matrix[x][y] == this){
+            this.fillColor(x, y, color)
+        }   
     }
-    tileIsEmpty(x,y){
-        console.log(1)
-        console.log(g.x)
-        return true
-
-    }
-    fillBoardRand(num, color){
+    fillBoardRand(num){
         for (let i = 0; i<num; i++){
-            this.fillRand(color)
+            this.fillRandWall()
         }
     }
     placeExit(){
@@ -45,17 +51,22 @@ class World{
         this.eY = round(random(this.sY))
         this.fillColor(this.eX,this.eY,'yellow')
     }
-    pixelIsFloor(x,y){
-
-        return ((this.matrix[Math.floor(x/this.tS)][Math.floor(y/this.tS)] == this.fC) 
-        && (this.matrix[Math.floor((x+this.tS-1)/this.tS)][Math.floor((y+this.tS-1)/this.tS)] == this.fC)
-        && (this.matrix[Math.floor((x)/this.tS)][Math.floor((y+this.tS-1)/this.tS)] == this.fC)
-        && (this.matrix[Math.floor((x+this.tS-1)/this.tS)][Math.floor((y)/this.tS)] == this.fC)
-        
-        )
-
+    placeEntity(e){
+        this.matrix[e.x][e.y] = e
     }
 
-
+    moveEntity(object, x, y){
+        if(object.x+x > this.sX || object.y+y > this.sY || object.x+x < 0 || object.y+y < 0) {
+            return false
+        }
+        if (this.matrix[object.x+x][object.y+y] == this.fC){
+            this.matrix[object.x][object.y] = 0
+            this.matrix[object.x+x][object.y+y] = object
+            object.x = object.x+x
+            object.y = object.y+y
+            return true
+        }
+        return false
+    }
 
 }

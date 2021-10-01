@@ -4,11 +4,12 @@ class Grog {
         this.x = x
         this.y = y
         this.rage = rage
-        this.speed = 1
+        this.speed = 10
+        this.moveCount = this.speed
 
     }
     drawImg(){
-        image(this.Img, this.x, this.y)
+        image(this.Img, this.x*tileS, this.y*tileS)
     }
     moveX(value){
         if (this.x + value>=0 && this.x + value<=CanvasX){
@@ -28,18 +29,20 @@ class Grog {
         
     }
     update(){ 
-        
-        if (keyIsDown(87)) {
-            g.moveY(-this.speed)
-        } 
-        if (keyIsDown(83)) {
-            g.moveY(this.speed)
-        } 
-        if (keyIsDown(65)) {
-            g.moveX(-this.speed)
-        } 
-        if (keyIsDown(68)) {
-            g.moveX(this.speed)
+        if (this.moveCount>0){
+            this.moveCount--
+            return
+        }
+        this.moveCount = this.speed
+        if (keyIsDown(87) && w.moveEntity(this, 0, -1)) {
+        } else
+        if (keyIsDown(83) && w.moveEntity(this, 0, 1)) {
+        } else
+        if (keyIsDown(65) && w.moveEntity(this, -1, 0)) {
+            
+        } else
+        if (keyIsDown(68) && w.moveEntity(this, 1, 0)) {
+            
         }
     }
 }
