@@ -19,9 +19,11 @@ function preload(){
         EnemyImgs [i-1] = loadImage(`assets/Enemy${i}.png`)
     }
     VMImg = loadImage('assets/VM.png')
-    VEImg = loadImage('assets/VecnaEvil.png')
-    GAImg = loadImage('assets/GrogAlone.png')
-    FVImg = loadImage('assets/FallOfVecna.png')
+    VEImg = loadImage('assets/VecnaEvil.jpg')
+    GAImg = loadImage('assets/GrogAlone.jpg')
+    GRImg = loadImage('assets/GrogReturn.jpg')
+    FVImg = loadImage('assets/FallOfVecna.jpg')
+    VM2Img = loadImage('assets/VM2.jpg')
 }
 
 
@@ -48,7 +50,13 @@ function draw(){
             runGame()
             break;
         case 4:
+            image(GRImg,0,0,CanvasX,CanvasY)
+            break;
+        case 5:
             image(FVImg,0,0,CanvasX,CanvasY)
+            break;
+        case 6:
+            image(VM2Img,0,0,CanvasX,CanvasY)
             break;
         
 

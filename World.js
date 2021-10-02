@@ -72,7 +72,7 @@ class World{
             e.die()
             g.kill()
         }
-        if (this.matrix[object.x+x][object.y+y] == "yellow" && object == g){
+        if (this.matrix[object.x+x][object.y+y] == this.exitColor && object == g){
             nextStage()
         }
 
