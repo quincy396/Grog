@@ -3,10 +3,12 @@ const drawTiles = (matrix) => {
     noStroke()
     for (let i = 0; i< matrix.length; i++){
         for (let j = 0; j< matrix[0].length; j++){
-            if(typeof (matrix[i][j]) == 'object' ) {
+            if(!Array.isArray(matrix[i][j])) {
                 matrix[i][j].drawImg()
             } else{
                 fill(matrix[i][j])
+
+                //fill(matrix[i][j][0],matrix[i][j][1],matrix[i][j][2])
                 rect(i*tileSize, j*tileSize,tileSize,tileSize)
             }
             

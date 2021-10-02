@@ -7,6 +7,8 @@ class World{
         this.sY = (this.pixelsY-this.tS)/this.tS
         this.fC = fc
         this.wC = wc
+        this.exitColor = [255,216,0]
+        
 
         this.resetWorld()
         
@@ -49,10 +51,10 @@ class World{
     placeExit(){
         this.eX = round(random(this.sX))
         this.eY = round(random(this.sY))
-        this.fillColor(this.eX,this.eY,'yellow')
+        this.fillColor(this.eX,this.eY,this.exitColor)
     }
-    placeEntity(e){
-        this.matrix[e.x][e.y] = e
+    placeEntity(entity){
+        this.matrix[entity.x][entity.y] = entity
     }
 
     moveEntity(object, x, y){
@@ -60,17 +62,20 @@ class World{
             return false
         }
         if (this.matrix[object.x+x][object.y+y] == this.fC){
-            this.matrix[object.x][object.y] = 0
+            this.matrix[object.x][object.y] = this.fC
             this.matrix[object.x+x][object.y+y] = object
             object.x = object.x+x
             object.y = object.y+y
             return true
         }
+        if (this.matrix[object.x+x][object.y+y] == e && object == g){
+            e.die()
+            g.kill()
+        }
         if (this.matrix[object.x+x][object.y+y] == "yellow" && object == g){
-            console.log("almost")
             nextStage()
         }
-        
+
         return false
     }
 
