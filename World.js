@@ -1,20 +1,18 @@
 class World{
-    constructor(CanvasX, CanvasY ,tileSize, fc, wc){
+    constructor(CanvasX, CanvasY ,tileSize, f, w){
         this.pixelsX = CanvasX
         this.pixelsY = CanvasY
         this.tS = tileSize
         this.sX = (this.pixelsX-this.tS)/this.tS
         this.sY = (this.pixelsY-this.tS)/this.tS
-        this.fC = fc
-        this.wC = wc
+        this.f = f
+        this.w = new Tile(w)
         this.exitColor = [255,216,0]
-        
 
         this.resetWorld()
-        
     }
     resetWorld(){
-        this.matrix = emptyMatrix(this.pixelsX, this.pixelsY, this.tS, this.fC)
+        this.matrix = emptyMatrix(this.pixelsX, this.pixelsY, this.tS, this.f)
     }
     drawWorld(){
         drawTiles(this.matrix)
@@ -22,18 +20,21 @@ class World{
     fillColor(x,y,color){
         this.matrix[x][y] = color
     }
+    fillWall(x,y){
+        this.matrix[x][y] = this.w
+    }
     fillRandWall(){
         let x = round(random(this.sX))
         let y = round(random(this.sY))
-        if (this.matrix[x][y] == this.fC){
-            this.fillColor(x, y, this.wC)
+        if (this.matrix[x][y] == this.f){
+            this.fillWall(x, y)
         }   
     }
     fillRandFloor(){
         let x = round(random(this.sX))
         let y = round(random(this.sY))
-        if (this.matrix[x][y] == this.wC){
-            this.fillColor(x, y, this.fC)
+        if (this.matrix[x][y] == this.w){
+            this.fillColor(x, y, this.f)
         }   
     }
     fillRand(color){
@@ -49,9 +50,13 @@ class World{
         }
     }
     placeExit(){
-        this.eX = round(random(this.sX))
-        this.eY = round(random(this.sY))
-        this.fillColor(this.eX,this.eY,this.exitColor)
+        this.eX = round(random(this.sX-2))+1
+        this.eY = round(random(this.sY-2))+1
+        for (let i = this.eX; i<=this.eX+1; i++){
+            for (let j = this.eY; j<=this.eY+1; j++){
+                this.fillColor(i,j,this.exitColor)
+            }
+        }
     }
     placeEntity(entity){
         this.matrix[entity.x][entity.y] = entity
@@ -61,21 +66,28 @@ class World{
         if(object.x+x > this.sX || object.y+y > this.sY || object.x+x < 0 || object.y+y < 0) {
             return false
         }
-        if (this.matrix[object.x+x][object.y+y] == this.fC){
-            this.matrix[object.x][object.y] = this.fC
+        if (this.matrix[object.x+x][object.y+y] == this.f){
+            this.matrix[object.x][object.y] = this.f
             this.matrix[object.x+x][object.y+y] = object
             object.x = object.x+x
             object.y = object.y+y
             return true
         }
-        if (this.matrix[object.x+x][object.y+y] == e && object == g){
-            e.die()
+        if (e.includes(this.matrix[object.x+x][object.y+y]) && object == g && !this.matrix[object.x+x][object.y+y].dead){
+            this.matrix[object.x+x][object.y+y].die()
             g.kill()
         }
         if (this.matrix[object.x+x][object.y+y] == this.exitColor && object == g){
             nextStage()
         }
 
+        return false
+    }
+    kickWall(x, y){
+        if (this.matrix[x][y] == this.w){
+            this.matrix[x][y] = this.f
+            return true
+        }
         return false
     }
 

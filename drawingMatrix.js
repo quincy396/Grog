@@ -4,7 +4,7 @@ const drawTiles = (matrix) => {
     for (let i = 0; i< matrix.length; i++){
         for (let j = 0; j< matrix[0].length; j++){
             if(!Array.isArray(matrix[i][j])) {
-                matrix[i][j].drawImg()
+                matrix[i][j].drawImg(i,j)
             } else{
                 fill(matrix[i][j])
 

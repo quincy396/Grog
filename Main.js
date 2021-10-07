@@ -2,39 +2,33 @@
 let CanvasX = 1184
 let CanvasY = 672
 let tileS = 32
-let gameState = 0
+let gameState = 3
+let stages = 5
 let w
 let g
+let e
+let numEnemies = 1
 let count = 10
 let cur = count
+let boardFill = 200
+let numReplace = 3
 let floorColor = [40,20,0]
 let wallColor = [100,100,100]
 
 function preload(){
-    grogImg = []
-    grogImg[0] = loadImage('assets/grog.png')
-    grogImg[1] = loadImage('assets/grog2.png')
-    EnemyImgs = []
-    for (let i = 1; i<=6; i++){
-        EnemyImgs [i-1] = loadImage(`assets/Enemy${i}.png`)
-    }
-    VMImg = loadImage('assets/VM.png')
-    VEImg = loadImage('assets/VecnaEvil.jpg')
-    GAImg = loadImage('assets/GrogAlone.jpg')
-    GRImg = loadImage('assets/GrogReturn.jpg')
-    FVImg = loadImage('assets/FallOfVecna.jpg')
-    VM2Img = loadImage('assets/VM2.jpg')
+    loadImages()
 }
-
 
 function setup(){
     createCanvas(CanvasX, CanvasY)
-    setWorld(200)
+    w = new World(CanvasX, CanvasY, tileS, floorColor, wallImg)
+    g = new Grog(grogImg, Math.floor(random(w.sX)), Math.floor(random(w.sY)), 0)
+    setWorld()
+    background(floorColor)
 }
 
-
 function draw(){
-    background(floorColor)
+    //background(0)
 
     switch(gameState){
         case 0:
@@ -59,27 +53,28 @@ function draw(){
             image(VM2Img,0,0,CanvasX,CanvasY)
             break;
         
-
             
     }
 }
 
-function setWorld(fill){
-    w = new World(CanvasX, CanvasY, tileS, floorColor, wallColor)
-    g = new Grog(grogImg, Math.floor(random(w.sX)), Math.floor(random(w.sY)), 0)
-    e = new Enemy(EnemyImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+function setWorld(){
+    e = Array.from({length: numEnemies}, () => {
+        return new Enemy(EnemyImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+    })
     w.placeExit()
     w.placeEntity(g)
-    w.placeEntity(e)
-    w.fillBoardRand(fill)
+    e.forEach(element => w.placeEntity(element))
+    w.fillBoardRand(boardFill)
 }
 
 function runGame(){
     g.update()
-    e.update()
+    e.forEach(element => element.update())
     if (cur<0){
-        w.fillRandWall()
-        w.fillRandFloor()
+        for (let i = 0; i<= numReplace; i++){
+            w.fillRandWall()
+            w.fillRandFloor()
+        }
         cur = count
     }
     cur--
@@ -87,16 +82,50 @@ function runGame(){
 }
 
 function nextStage() {
-    gameState ++
+    if (stages<=0){
+        nextState()
+    } else{
+        background(floorColor)
+        w.resetWorld()
+        numReplace +=2
+        //count -=2
+        numEnemies ++
+        boardFill += 63
+        stages --
+        setWorld()
+        
+    }
+}
+
+
+function keyTyped(){
+    if (gameState == 3){
+        if(keyCode == 32){
+            g.kickDowntheDoor()
+        } else if (keyCode == 87 || keyCode == UP_ARROW) {
+            g.direction = 1
+        } else if (keyCode == 83 || keyCode == DOWN_ARROW) {
+            g.direction = 2
+        } else if (keyCode == 65 || keyCode == LEFT_ARROW) {
+            g.direction = 3
+        } else if (keyCode == 68 || keyCode == RIGHT_ARROW) { 
+            g.direction = 4
+        }
+    } 
 }
 function keyPressed(){
-    if (gameState != 3){
-        nextStage()
-    }
+    press()
 }
 function mousePressed(){
+    press()
+}
+function press(){
     if (gameState != 3){
-        nextStage()
+        nextState()
     }
+}
+function nextState() {
+    gameState ++
+    
 }
 
