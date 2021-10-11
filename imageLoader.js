@@ -18,6 +18,7 @@ const loadImages = () => {
     GRImg = loadImage('assets/GrogReturn.jpg')
     FVImg = loadImage('assets/FallOfVecna.jpg')
     VM2Img = loadImage('assets/VM2.jpg')
+    endImg = loadImage('assets/end.png')
 }
 
 

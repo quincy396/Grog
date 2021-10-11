@@ -9,7 +9,7 @@ const drawTiles = (matrix) => {
                 fill(matrix[i][j])
 
                 //fill(matrix[i][j][0],matrix[i][j][1],matrix[i][j][2])
-                rect(i*tileSize, j*tileSize,tileSize,tileSize)
+                //rect(i*tileSize, j*tileSize,tileSize,tileSize)
             }
             
         }

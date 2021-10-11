@@ -7,7 +7,7 @@ class World{
         this.sY = (this.pixelsY-this.tS)/this.tS
         this.f = f
         this.w = new Tile(w)
-        this.exitColor = [255,216,0]
+        this.exitColor = new Tile(endImg)
 
         this.resetWorld()
     }
