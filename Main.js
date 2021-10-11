@@ -1,6 +1,9 @@
 
-let CanvasX = 1184
-let CanvasY = 672
+let maxX = window.innerWidth
+let maxY = window.innerHeight
+let CanvasX
+let CanvasY
+
 let tileS = 32
 let gameState = 3
 let stages = 5
@@ -12,19 +15,23 @@ let count = 10
 let cur = count
 let boardFill = 200
 let numReplace = 3
-let floor = 0
-let floorColor = [random(150),random(150),random(150)]
+let floorColor 
 let wallColor = [100,100,100]
 
 function preload(){
+    CanvasX = (round(maxX/32)-2)*32
+    CanvasY = (round(maxY/32)-2)*32
+    console.log(CanvasX,CanvasY)
     loadImages()
 }
 
 function setup(){
+    floorColor = [random(150),random(150),random(150)]
     createCanvas(CanvasX, CanvasY)
     w = new World(CanvasX, CanvasY, tileS, floorColor, wallImg)
     g = new Grog(grogImg, Math.floor(random(w.sX)), Math.floor(random(w.sY)), 0)
     setWorld()
+    
     background(floorColor)
 }
 
@@ -69,6 +76,7 @@ function setWorld(){
 }
 
 function runGame(){
+    background(floorColor)
     g.update()
     e.forEach(element => element.update())
     if (cur<0){
@@ -81,6 +89,8 @@ function runGame(){
     cur--
     w.drawWorld()
 }
+
+
 
 function nextStage() {
     if (stages<=0){
@@ -98,6 +108,9 @@ function nextStage() {
         
     }
 }
+
+
+
 
 
 function keyTyped(){
