@@ -39,21 +39,21 @@ class Enemy {
             this.ImgCounter ++
         }
 
-        for (let i = 1; i<=7; i++){
-            let d = round(random(4))
-            if ((d==1) && w.moveEntity(this, 0, -1)) {
-                return 
-            } else
-            if ((d==2) && w.moveEntity(this, 0, 1)) {
-                return 
-            } else
-            if ((d==3) && w.moveEntity(this, -1, 0)) {
-                return 
-            } else
-            if ((d==4) && w.moveEntity(this, 1, 0)) { 
-                return 
-            }
-        }
+        // for (let i = 1; i<=7; i++){
+        //     let d = round(random(4))
+        //     if ((d==1) && w.moveEntity(this, 0, -1)) {
+        //         return 
+        //     } else
+        //     if ((d==2) && w.moveEntity(this, 0, 1)) {
+        //         return 
+        //     } else
+        //     if ((d==3) && w.moveEntity(this, -1, 0)) {
+        //         return 
+        //     } else
+        //     if ((d==4) && w.moveEntity(this, 1, 0)) { 
+        //         return 
+        //     }
+        // }
     }
     update1(){ 
         if (this.moveCount>0){

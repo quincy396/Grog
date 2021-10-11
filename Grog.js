@@ -8,6 +8,7 @@ class Grog {
         this.speed = 9
         this.moveCount = this.speed
         this.direction = 0
+        this.fighting = false
 
     }
     drawImg(){
@@ -19,22 +20,19 @@ class Grog {
         this.Img = this.Imgs[1]
     }
 
-    kickDowntheDoor(){
-        let i = 5
-        if(this.rage<=0){
-            return 
+    fight(){
+        let canBreakWall = this.rage>0
 
-        }
-        if (keyIsDown(87) && w.kickWall(this.x, this.y-1)) {
+        this.fighting = true
+        if (keyIsDown(87) && w.fight(this, this.x, this.y-1, canBreakWall)) {
             this.rage --
-        } else if (keyIsDown(83) && w.kickWall(this.x, this.y+1)) {
+        } else if (keyIsDown(83) && w.fight(this, this.x, this.y+1, canBreakWall)) {
             this.rage --
-        } else if (keyIsDown(65) && w.kickWall(this.x -1, this.y)) {
+        } else if (keyIsDown(65) && w.fight(this, this.x -1, this.y, canBreakWall)) {
             this.rage --
-        } else if (keyIsDown(68) && w.kickWall(this.x+1, this.y)) {
+        } else if (keyIsDown(68) && w.fight(this, this.x+1, this.y, canBreakWall)) {
             this.rage --   
         }
-        console.log(this.speed )
         if (this.rage<=0){
             this.Img = this.Imgs[0]
         }

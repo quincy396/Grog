@@ -73,20 +73,26 @@ class World{
             object.y = object.y+y
             return true
         }
-        if (e.includes(this.matrix[object.x+x][object.y+y]) && object == g && !this.matrix[object.x+x][object.y+y].dead){
-            this.matrix[object.x+x][object.y+y].die()
-            g.kill()
-        }
+        
         if (this.matrix[object.x+x][object.y+y] == this.exitColor && object == g){
             nextStage()
         }
 
         return false
     }
-    kickWall(x, y){
-        if (this.matrix[x][y] == this.w){
+    fight(object, x, y, bool){
+        console.log(0)
+        if (this.matrix[x][y] == this.w && bool){
             this.matrix[x][y] = this.f
+            object.x = x
+            object.y = y
             return true
+        }
+        console.log(1)
+        if (e.includes(this.matrix[x][y]) && object == g && !this.matrix[x][y].dead){
+            console.log(2)
+            this.matrix[x][y].die()
+            g.kill()
         }
         return false
     }
