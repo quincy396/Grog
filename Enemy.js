@@ -33,13 +33,27 @@ class Enemy {
         }
         this.moveCount = this.speed
 
-
-        if (round(random(1)) == 1){
-            w.moveEntity(this, round(random(2)-1), 0)
+        if (this.ImgCounter == 1){
+            this.ImgCounter --
         } else{
-            w.moveEntity(this, 0, round(random(2)-1))
+            this.ImgCounter ++
         }
 
+        for (let i = 1; i<=7; i++){
+            let d = round(random(4))
+            if ((d==1) && w.moveEntity(this, 0, -1)) {
+                return 
+            } else
+            if ((d==2) && w.moveEntity(this, 0, 1)) {
+                return 
+            } else
+            if ((d==3) && w.moveEntity(this, -1, 0)) {
+                return 
+            } else
+            if ((d==4) && w.moveEntity(this, 1, 0)) { 
+                return 
+            }
+        }
     }
     update1(){ 
         if (this.moveCount>0){
