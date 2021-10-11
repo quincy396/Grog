@@ -12,7 +12,8 @@ let count = 10
 let cur = count
 let boardFill = 200
 let numReplace = 3
-let floorColor = [40,20,0]
+let floor = 0
+let floorColor = [random(150),random(150),random(150)]
 let wallColor = [100,100,100]
 
 function preload(){
@@ -59,7 +60,7 @@ function draw(){
 
 function setWorld(){
     e = Array.from({length: numEnemies}, () => {
-        return new Enemy(EnemyImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+        return new Enemy(minoImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
     })
     w.placeExit()
     w.placeEntity(g)
@@ -85,6 +86,7 @@ function nextStage() {
     if (stages<=0){
         nextState()
     } else{
+        floorColor = [random(150),random(150),random(150)]
         background(floorColor)
         w.resetWorld()
         numReplace +=2

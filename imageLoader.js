@@ -7,6 +7,10 @@ const loadImages = () => {
     for (let i = 1; i<=6; i++){
         EnemyImgs [i-1] = loadImage(`assets/Enemy${i}.png`)
     }
+    minoImgs = []
+    for (let i = 1; i<=5; i++){
+        minoImgs [i-1] = loadImage(`assets/mino-${i}.png`)
+    }
     wallImg = loadImage('assets/wall.png')
     VMImg = loadImage('assets/VM.png')
     VEImg = loadImage('assets/VecnaEvil.jpg')
