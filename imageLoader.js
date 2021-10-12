@@ -4,6 +4,10 @@ const loadImages = () => {
     grogImg[0] = loadImage('assets/grog.png')
     grogImg[0] = loadImage('assets/main.png')
     grogImg[1] = loadImage('assets/grog2.png')
+    mainImg = []
+    mainImg[0] = loadImage('assets/main.png')
+    mainImg[1] = loadImage('assets/main2.png')
+
     EnemyImgs = []
     for (let i = 1; i<=6; i++){
         EnemyImgs [i-1] = loadImage(`assets/Enemy${i}.png`)

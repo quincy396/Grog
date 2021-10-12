@@ -28,7 +28,7 @@ function setup(){
     floorColor = [random(150),random(150),random(150)]
     createCanvas(CanvasX, CanvasY)
     w = new World(CanvasX, CanvasY, tileS, floorColor, wallImg)
-    g = new Grog(grogImg, Math.floor(random(w.sX)), Math.floor(random(w.sY)), 0)
+    g = new Grog(mainImg, Math.floor(random(w.sX)), Math.floor(random(w.sY)), 0)
     setWorld()
     
     background(floorColor)
