@@ -13,7 +13,7 @@ let e
 let numEnemies = 1
 let count = 10
 let cur = count
-let boardFill = 200
+let boardFill
 let numReplace = 3
 let floorColor 
 let wallColor = [100,100,100]
@@ -21,6 +21,7 @@ let wallColor = [100,100,100]
 function preload(){
     CanvasX = (round(maxX/32)-2)*32
     CanvasY = (round(maxY/32)-2)*32
+    boardFill = (CanvasX/32 * CanvasY/32)/3
     loadImages()
 }
 
