@@ -1,10 +1,12 @@
 class Enemy {
-    constructor(Imgs, x, y){
+    constructor(Imgs, pow, x, y){
         this.Imgs = Imgs
+        this.Imgs2 = pow
         this.ImgCounter = 0
         this.x = x
         this.y = y
-        this.speed = 110000000
+        this.normalspeed = 25
+        this.speed = this.normalspeed
         this.moveCount = this.speed
         this.dead = false
         this.deathSpeed = 5
@@ -15,7 +17,15 @@ class Enemy {
     } 
     die(){
         this.dead = true
-        this.moveCount = this.deathSpeed
+        this.speed = this.deathSpeed
+        this.ImgCounter = 0
+    }
+    deathAnimation(){
+        this.Imgs = this.Imgs2
+        if (this.ImgCounter==this.Imgs.length-1){
+            w.fillColor(this.x, this.y,floorColor)
+        }
+        this.ImgCounter ++
     }
     
     update(){ 
@@ -23,21 +33,26 @@ class Enemy {
             this.moveCount--
             return
         }
+        this.moveCount = this.speed
         if (this.dead){
-            if (this.ImgCounter==this.Imgs.length-1){
-                w.fillColor(this.x, this.y,floorColor)
-            }
-            this.ImgCounter ++
-            this.moveCount = this.deathSpeed
+            this.deathAnimation()
             return
         }
-        this.moveCount = this.speed
 
-        if (this.ImgCounter == 1){
-            this.ImgCounter --
-        } else{
+        if (g.x + 3 > this.x && g.x - 3 <this.x && g.y + 3 > this.y && g.y - 3 <this.y){
+            this.speed = this.deathSpeed
+
             this.ImgCounter ++
+            if (this.ImgCounter>this.Imgs.length-1){
+                this.ImgCounter = 0
+            }
+            return
+        } else if (this.ImgCounter == 1){
+            this.ImgCounter = 0
+        } else{
+            this.ImgCounter = 1
         }
+        this.speed = this.normalspeed
 
         for (let i = 1; i<=7; i++){
             let d = round(random(4))

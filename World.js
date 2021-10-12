@@ -82,16 +82,13 @@ class World{
         return false
     }
     fight(object, x, y, bool){
-        console.log(0)
         if (this.matrix[x][y] == this.w && bool){
             this.matrix[x][y] = this.f
             object.x = x
             object.y = y
             return true
         }
-        console.log(1)
         if (e.includes(this.matrix[x][y]) && object == g && !this.matrix[x][y].dead){
-            console.log(2)
             this.matrix[x][y].die()
             g.kill()
         }

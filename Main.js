@@ -21,7 +21,6 @@ let wallColor = [100,100,100]
 function preload(){
     CanvasX = (round(maxX/32)-2)*32
     CanvasY = (round(maxY/32)-2)*32
-    console.log(CanvasX,CanvasY)
     loadImages()
 }
 
@@ -67,7 +66,7 @@ function draw(){
 
 function setWorld(){
     e = Array.from({length: numEnemies}, () => {
-        return new Enemy(minoImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+        return new Enemy(minoImgs, powImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
     })
     w.placeExit()
     w.placeEntity(g)
