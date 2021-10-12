@@ -2,6 +2,7 @@
 const loadImages = () => {
     grogImg = []
     grogImg[0] = loadImage('assets/grog.png')
+    grogImg[0] = loadImage('assets/main.png')
     grogImg[1] = loadImage('assets/grog2.png')
     EnemyImgs = []
     for (let i = 1; i<=6; i++){
@@ -19,6 +20,7 @@ const loadImages = () => {
     FVImg = loadImage('assets/FallOfVecna.jpg')
     VM2Img = loadImage('assets/VM2.jpg')
     endImg = loadImage('assets/end.png')
+    end2Img = loadImage('assets/end2.png')
 }
 
 
