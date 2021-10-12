@@ -115,7 +115,7 @@ function nextStage() {
 
 function keyTyped(){
     if (gameState == 3){
-        if(keyCode == 32){
+        if(keyCode == 32 || keyCode == 84){
             g.fight()
         } else if (keyCode == 87 || keyCode == UP_ARROW) {
             g.direction = 1

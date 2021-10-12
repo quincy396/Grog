@@ -4,7 +4,7 @@ class Enemy {
         this.ImgCounter = 0
         this.x = x
         this.y = y
-        this.speed = 15
+        this.speed = 110000000
         this.moveCount = this.speed
         this.dead = false
         this.deathSpeed = 5
