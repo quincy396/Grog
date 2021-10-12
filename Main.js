@@ -97,7 +97,7 @@ function nextStage() {
     } else{
         floorColor = [random(150),random(150),random(150)]
         background(floorColor)
-        w.f = floorColor
+        //w.f = floorColor
         w.resetWorld()
         numReplace +=2
         //count -=2
