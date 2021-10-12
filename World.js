@@ -82,14 +82,15 @@ class World{
         return false
     }
     fight(object, x, y, bool){
-        if (this.matrix[x][y] == this.w && bool){
-            this.matrix[x][y] = this.f
-            object.x = x
-            object.y = y
+        if (this.matrix[object.x+x][object.y+y] == this.w && bool){
+            this.matrix[object.x][object.y] = this.f
+            this.matrix[object.x+x][object.y+y] = object
+            object.x = object.x+x
+            object.y = object.y+y
             return true
         }
-        if (e.includes(this.matrix[x][y]) && object == g && !this.matrix[x][y].dead){
-            this.matrix[x][y].die()
+        if (e.includes(this.matrix[object.x+x][object.y+y]) && object == g && !this.matrix[object.x+x][object.y+y].dead){
+            this.matrix[object.x+x][object.y+y].die()
             g.kill()
         }
         return false
