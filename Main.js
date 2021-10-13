@@ -6,7 +6,7 @@ let CanvasY
 
 let tileS = 32
 let gameState = 1
-let stages = 5
+let stages = 4
 let w
 let g
 let e
@@ -30,7 +30,7 @@ function preload(){
 function setup(){
     floorColor = [random(150),random(150),random(150)]
     createCanvas(CanvasX, CanvasY)
-    w = new World(CanvasX, CanvasY, tileS, floorColor, wallImg)
+    w = new World(CanvasX, CanvasY, tileS, floorColor, wallImg, wall2Img)
     g = new Grog(mainImg, Math.floor(random(w.sX)), Math.floor(random(w.sY)), 0)
     setWorld()
     
@@ -106,6 +106,7 @@ function nextStage() {
         nextState()
     } else{
         floorColor = [random(150),random(150),random(150)]
+        w.changeWall()
         background(floorColor)
         //w.f = floorColor
         w.resetWorld()

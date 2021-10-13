@@ -1,12 +1,14 @@
 class World{
-    constructor(CanvasX, CanvasY ,tileSize, f, w){
+    constructor(CanvasX, CanvasY ,tileSize, f, w1, w2){
         this.pixelsX = CanvasX
         this.pixelsY = CanvasY
         this.tS = tileSize
         this.sX = (this.pixelsX-this.tS)/this.tS
         this.sY = (this.pixelsY-this.tS)/this.tS
         this.f = f
-        this.w = new Tile(w)
+        this.w1 = new Tile(w1)
+        this.w2 = new Tile(w2)
+        this.w = this.w1
         this.exitColor = new Tile(endImg)
 
         this.resetWorld()
@@ -64,6 +66,13 @@ class World{
     }
     placeEntity(entity){
         this.matrix[entity.x][entity.y] = entity
+    }
+    changeWall(){
+        if(this.w==this.w1){
+            this.w=this.w2
+        } else{
+            this.w=this.w1
+        }
     }
 
     moveEntity(object, x, y){
