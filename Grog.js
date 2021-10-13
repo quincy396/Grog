@@ -24,13 +24,13 @@ class Grog {
         let canBreakWall = this.rage>0
 
         this.fighting = true
-        if (keyIsDown(87) && w.fight(this, this.x, this.y-1, canBreakWall)) {
+        if (keyIsDown(87) && w.fight(this, 0, -1, canBreakWall)) {
             this.rage --
-        } else if (keyIsDown(83) && w.fight(this, this.x, this.y+1, canBreakWall)) {
+        } else if (keyIsDown(83) && w.fight(this, 0, 1, canBreakWall)) {
             this.rage --
-        } else if (keyIsDown(65) && w.fight(this, this.x -1, this.y, canBreakWall)) {
+        } else if (keyIsDown(65) && w.fight(this, -1, 0, canBreakWall)) {
             this.rage --
-        } else if (keyIsDown(68) && w.fight(this, this.x+1, this.y, canBreakWall)) {
+        } else if (keyIsDown(68) && w.fight(this, +1, 0, canBreakWall)) {
             this.rage --   
         }
         if (this.rage<=0){

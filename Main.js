@@ -5,7 +5,7 @@ let CanvasX
 let CanvasY
 
 let tileS = 32
-let gameState = 3
+let gameState = 1
 let stages = 5
 let w
 let g
@@ -17,12 +17,14 @@ let boardFill
 let numReplace = 3
 let floorColor 
 let wallColor = [100,100,100]
+let currentEnemyImgs
 
 function preload(){
     CanvasX = (round(maxX/32)-2)*32
     CanvasY = (round(maxY/32)-2)*32
     boardFill = (CanvasX/32 * CanvasY/32)/3
     loadImages()
+    currentEnemyImgs = muckImgs
 }
 
 function setup(){
@@ -43,10 +45,10 @@ function draw(){
             image(VMImg,0,0,CanvasX,CanvasY)
             break;
         case 1:
-            image(VEImg,0,0,CanvasX,CanvasY)
+            image(attackImg,0,0,CanvasX,CanvasY)
             break;
         case 2:
-            image(GAImg,0,0,CanvasX,CanvasY)
+            image(introImg,0,0,CanvasX,CanvasY)
             break;
         case 3:
             runGame()
@@ -66,13 +68,20 @@ function draw(){
 }
 
 function setWorld(){
-    e = Array.from({length: numEnemies}, () => {
-        return new Enemy(minoImgs, powImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
-    })
+    createEnemies()
     w.placeExit()
     w.placeEntity(g)
     e.forEach(element => w.placeEntity(element))
     w.fillBoardRand(boardFill)
+}
+function createEnemies(){
+    e = Array.from({length: numEnemies}, () => {
+        let type = 0
+        if (random(10)>5){
+            type = 1 
+        }
+        return new Enemy(type, powImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+    })
 }
 
 function runGame(){

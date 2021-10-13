@@ -24,6 +24,9 @@ class World{
     fillWall(x,y){
         this.matrix[x][y] = this.w
     }
+    fillFloor(x, y){
+        this.fillColor(x, y, this.f)
+    }
     fillRandWall(){
         let x = round(random(this.sX))
         let y = round(random(this.sY))
@@ -35,7 +38,7 @@ class World{
         let x = round(random(this.sX))
         let y = round(random(this.sY))
         if (this.matrix[x][y] == this.w){
-            this.fillColor(x, y, this.f)
+            this.fillFloor(x, y)
         }   
     }
     fillRand(color){
@@ -89,8 +92,10 @@ class World{
             object.y = object.y+y
             return true
         }
+    
         if (e.includes(this.matrix[object.x+x][object.y+y]) && object == g && !this.matrix[object.x+x][object.y+y].dead){
             this.matrix[object.x+x][object.y+y].die()
+
             g.kill()
         }
         return false

@@ -1,7 +1,13 @@
 class Enemy {
-    constructor(Imgs, pow, x, y){
-        this.Imgs = Imgs
-        this.Imgs2 = pow
+    constructor(type, pow, x, y){
+        this.type = type
+        if (type == 1){
+            this.Imgs = minoImgs
+        }else if (type == 0){
+            this.Imgs = muckImgs
+        }
+        
+        this.ImgsPow = pow
         this.ImgCounter = 0
         this.x = x
         this.y = y
@@ -21,14 +27,14 @@ class Enemy {
         this.ImgCounter = 0
     }
     deathAnimation(){
-        this.Imgs = this.Imgs2
+        this.Imgs = this.ImgsPow
         if (this.ImgCounter==this.Imgs.length-1){
-            w.fillColor(this.x, this.y,floorColor)
+            w.fillFloor(this.x, this.y)
         }
         this.ImgCounter ++
     }
-    
-    update(){ 
+
+    update(){
         if (this.moveCount>0){
             this.moveCount--
             return
@@ -54,6 +60,17 @@ class Enemy {
         }
         this.speed = this.normalspeed
 
+
+
+        if (this.type == 0){
+            this.updateRand()
+        } else if (this.type == 1){
+            this.updateApproach()
+        }
+    }
+    
+    updateRand(){ 
+
         for (let i = 1; i<=7; i++){
             let d = round(random(4))
             if ((d==1) && w.moveEntity(this, 0, -1)) {
@@ -70,20 +87,7 @@ class Enemy {
             }
         }
     }
-    update1(){ 
-        if (this.moveCount>0){
-            this.moveCount--
-            return
-        }
-        if (this.dead){
-            if (this.ImgCounter==this.Imgs.length-1){
-                w.fillColor(this.x, this.y,floorColor)
-            }
-            this.ImgCounter ++
-            this.moveCount = this.deathSpeed
-            return
-        }
-        this.moveCount = this.speed
+    updateFlee(){ 
 
 
         if ((g.y>this.y) && w.moveEntity(this, 0, -1)) {
@@ -96,21 +100,7 @@ class Enemy {
         }
 
     }
-    update2(){ 
-        if (this.moveCount>0){
-            this.moveCount--
-            return
-        }
-        if (this.dead){
-            if (this.ImgCounter==this.Imgs.length-1){
-                w.fillColor(this.x, this.y,floorColor)
-            }
-            this.ImgCounter ++
-            this.moveCount = this.deathSpeed
-            return
-        }
-        this.moveCount = this.speed
-
+    updateApproach(){ 
 
         if ((g.y<this.y) && w.moveEntity(this, 0, -1)) {
         } else
