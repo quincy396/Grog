@@ -36,6 +36,8 @@ const loadImages = () => {
     end2Img = loadImage('assets/end2.png')
     attackImg = loadImage('assets/An_Attack.png')
     introImg = loadImage('assets/directions.png')
+    gazingImg = loadImage('assets/gazing.png')
+    happyEndingImg = loadImage('assets/happyending.png')
 }
 
 

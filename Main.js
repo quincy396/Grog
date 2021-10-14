@@ -5,7 +5,7 @@ let CanvasX
 let CanvasY
 
 let tileS = 32
-let gameState = 1
+let gameState = 0
 let stages = 4
 let w
 let g
@@ -42,7 +42,7 @@ function draw(){
 
     switch(gameState){
         case 0:
-            image(VMImg,0,0,CanvasX,CanvasY)
+            image(gazingImg,0,0,CanvasX,CanvasY)
             break;
         case 1:
             image(attackImg,0,0,CanvasX,CanvasY)
@@ -54,14 +54,14 @@ function draw(){
             runGame()
             break;
         case 4:
-            image(GRImg,0,0,CanvasX,CanvasY)
+            image(happyEndingImg,0,0,CanvasX,CanvasY)
             break;
-        case 5:
-            image(FVImg,0,0,CanvasX,CanvasY)
-            break;
-        case 6:
-            image(VM2Img,0,0,CanvasX,CanvasY)
-            break;
+        // case 5:
+        //     image(FVImg,0,0,CanvasX,CanvasY)
+        //     break;
+        // case 6:
+        //     image(VM2Img,0,0,CanvasX,CanvasY)
+        //     break;
         
             
     }
@@ -76,11 +76,7 @@ function setWorld(){
 }
 function createEnemies(){
     e = Array.from({length: numEnemies}, () => {
-        let type = 0
-        if (random(10)>5){
-            type = 1 
-        }
-        return new Enemy(type, powImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+        return new Enemy(1, powImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
     })
 }
 
@@ -102,8 +98,8 @@ function runGame(){
 
 
 function nextStage() {
-    if (stages<=0){
-        nextState()
+    if (stages<=1){
+        finalStage()
     } else{
         floorColor = [random(150),random(150),random(150)]
         w.changeWall()
@@ -113,13 +109,27 @@ function nextStage() {
         numReplace +=2
         //count -=2
         numEnemies ++
-        boardFill += 63
+        boardFill = boardFill * 1.2
         stages --
         setWorld()
         
     }
 }
 
+function finalStage(){
+    floorColor = [150,0,0]
+    w.changeWall()
+    background(floorColor)
+    w.resetWorld()
+    numReplace +=2
+    stages --
+    e = Array.from({length: 1}, () => {
+        return new Enemy(0, powImgs, Math.floor(random(w.sX)), Math.floor(random(w.sY)))
+    })
+    w.placeEntity(g)
+    e.forEach(element => w.placeEntity(element))
+    w.fillBoardRand(boardFill)
+}
 
 
 

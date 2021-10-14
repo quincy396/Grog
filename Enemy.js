@@ -29,6 +29,9 @@ class Enemy {
     deathAnimation(){
         this.Imgs = this.ImgsPow
         if (this.ImgCounter==this.Imgs.length-1){
+            if (this.type == 0){
+                nextState()
+            }
             w.fillFloor(this.x, this.y)
         }
         this.ImgCounter ++

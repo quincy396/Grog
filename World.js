@@ -18,7 +18,10 @@ class World{
     }
     drawWorld(){
         drawTiles(this.matrix)
-        image(end2Img, this.eX*tileS, this.eY*tileS,64,64)
+        if (stages>=1){
+            image(end2Img, this.eX*tileS, this.eY*tileS,64,64)
+        }
+        
     }
     fillColor(x,y,color){
         this.matrix[x][y] = color
