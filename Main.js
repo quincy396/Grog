@@ -6,7 +6,7 @@ let CanvasY
 
 let tileS = 32
 let gameState = 0
-let stages = 2
+let stages = 4
 let w
 let g
 let e
