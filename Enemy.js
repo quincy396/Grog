@@ -53,6 +53,10 @@ class Enemy {
 
             this.ImgCounter ++
             if (this.ImgCounter>this.Imgs.length-1){
+                if (this.type == 0){
+                    gameState = 1
+                    stages = 4
+                }
                 this.ImgCounter = 0
             }
             return
