@@ -56,6 +56,8 @@ class Enemy {
                 if (this.type == 0){
                     gameState = 1
                     stages = 4
+                    nextStage()
+                    g.speed=9
                 }
                 this.ImgCounter = 0
             }
