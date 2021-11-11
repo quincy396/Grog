@@ -16,7 +16,7 @@ class Grog {
     } 
     kill(){
         this.rage +=3
-        //this.speed = this.speed-1
+        this.speed = this.speed-1
         this.Img = this.Imgs[1]
     }
 
@@ -26,12 +26,16 @@ class Grog {
         this.fighting = true
         if (keyIsDown(87) && w.fight(this, 0, -1, canBreakWall)) {
             this.rage --
+            this.speed = this.speed + (1/3)
         } else if (keyIsDown(83) && w.fight(this, 0, 1, canBreakWall)) {
             this.rage --
+            this.speed = this.speed + (1/3)
         } else if (keyIsDown(65) && w.fight(this, -1, 0, canBreakWall)) {
             this.rage --
+            this.speed = this.speed + (1/3)
         } else if (keyIsDown(68) && w.fight(this, +1, 0, canBreakWall)) {
-            this.rage --   
+            this.rage --
+            this.speed = this.speed + (1/3)
         }
         if (this.rage<=0){
             this.Img = this.Imgs[0]
