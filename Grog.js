@@ -16,7 +16,7 @@ class Grog {
     } 
     kill(){
         this.rage +=3
-        this.speed = this.speed-1
+        //this.speed = this.speed-1
         this.Img = this.Imgs[1]
     }
 
